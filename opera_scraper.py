@@ -186,9 +186,9 @@ http_info = {"countries" : countries,
 if __name__ == "__main__":
     conn = sqlite3.connect(dbfile)
     cur = conn.cursor()
-    initialize_database(cur)
-    fetch_cities(cur, http_info)
-    fetch_productions(cur, http_info)
-    fetch_production_info(cur, http_info)
+    # initialize_database(cur)
+    # fetch_cities(cur, http_info)
+    # fetch_productions(cur, http_info)
+    # fetch_production_info(cur, http_info)
     conn.commit()
     conn.close()
