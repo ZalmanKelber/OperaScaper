@@ -72,8 +72,8 @@ def get_artist_info():
     for artist in artist_info:
         artist_info[artist]["companies"] = len(artist_info[artist]["companies"].keys())
         artist_info[artist]["cities"] = len(artist_info[artist]["cities"].keys())
-    with open('js/artist_info.js', 'w') as outfile:
-        outfile.write("artist_info = ")
+    with open('js/artistInfo.js', 'w') as outfile:
+        outfile.write("artistInfo = ")
         json.dump(artist_info, outfile)
 
 

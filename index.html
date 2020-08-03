@@ -4,24 +4,49 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=yes" />
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Sora:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="css/styles.css">
-
   <title>Operabase Scraper</title>
 
 </head>
 
 <body>
   <h1>Operabase Scraper</h1>
-  <h3>World Map of Opera Performances</h3>
+  <h3>I. World Map of Opera Performances in 2019 (zoomable)</h3>
   <div class="canvas-wrapper">
-    <svg id="map" width="960" height="500"></svg>
     <div class="map-search">
       <p>Search by Composer</p>
       <form id="map-form">
-        <input type="text" name="composer"/>
-        <input type="submit" />
+        <input class="input" type="text" name="composer"/>
+        <br />
+        <input type="submit" class="btn btn-primary custom-top-margin"/>
       </form>
+    </div>
+    <svg id="map" width="960" height="500"></svg>
+  </div>
+  <h3>II. Percentage of Singers in a Given Number of Performances in 2019</h3>
+  <div class="canvas-wrapper">
+    <div class="chart-select">
+      <div class="dropdown">
+        <button
+          class="btn btn-primary dropdown-toggle"
+          type="button"
+          data-toggle="dropdown"
+        >
+          Select y-axis:
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a id="y-performances" href="#">No. of Performances</a></li>
+          <li><a id="y-productions" href="#">No. of Productions</a></li>
+          <li><a id="y-companies" href="#">No. of Companies</a></li>
+          <li><a id="y-cities" href="#">No. of Cities</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="chart-wrapper">
+      <svg class="chart" width="960" height="500"></svg>
     </div>
   </div>
   <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -32,7 +57,8 @@
   <script src="./js/cities.js"></script>
   <script src="./js/casts.js"></script>
   <script src="./js/artists.js"></script>
-  <script src="./js/artist_info.js"></script>
+  <script src="./js/artistInfo.js"></script>
   <script src="./js/renderMap.js"></script>
+    <script src="./js/renderChart.js"></script>
 </body>
 </html>

@@ -2,25 +2,21 @@
   const state = {
     composer: null,
     mapData: null,
-    cities,
+    cities: Object.values(cities),
     prevZoom: 1
   }
-
-  const mapForm = document.getElementById("map-form");
-  mapForm.addEventListener("submit", e => {
-    e.preventDefault();
-    state.composer = e.target.composer.value;
-    renderCircles(state);
-    const titles = document.querySelectorAll(".map-title");
-    titles.forEach(title => {
-      title.remove();
-    })
+  state.cities.forEach(city1 => {
+    state.cities.forEach(city2 => {
+      if (city1.lat === city2.lat && city1.lng === city2.lng && city1 !== city2) {
+        console.log(city1.name);
+      }
+    });
   });
 
   const { select, json, geoPath, geoEckert4, scalePow, zoom, zoomIdentity } = d3;
   const { feature } = topojson;
 
-  const svg = select("svg");
+  const svg = select("#map");
   const gMap = svg.append("g")
   const gCities = svg.append("g")
   const gx = svg.append("g");
@@ -48,8 +44,7 @@
     .range([2, 15])
 
   function renderCircles() {
-    console.log("render circles called");
-    const circles = gCities.selectAll("circle").data(Object.values(state.cities));
+    const circles = gCities.selectAll("circle").data(state.cities);
     circles
       .enter().append("circle")
         .attr("class", "city")
@@ -120,7 +115,15 @@
 
   svg.call(zoomSetup).call(zoomSetup.transform, zoomIdentity);
 
-})();
+  const mapForm = document.getElementById("map-form");
+  mapForm.addEventListener("submit", e => {
+    e.preventDefault();
+    state.composer = e.target.composer.value;
+    renderCircles(state);
+    const titles = document.querySelectorAll(".map-title");
+    titles.forEach(title => {
+      title.remove();
+    })
+  });
 
-const state = 4;
-console.log(state);
+})();

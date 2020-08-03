@@ -18,3 +18,37 @@
   fill: maroon;
   fill-opacity: 0.8;
 }
+
+.line-path {
+  fill: none;
+  stroke-width: 5;
+  stroke-linejoin: round;
+}
+
+.tick text {
+  font-size: 1.5em;
+  fill: #635F5D;
+}
+
+.tick line {
+  stroke: #C0C0BB;
+}
+
+.axis-label {
+  font-size: 2em;
+  fill: black;
+}
+
+.canvas-wrapper {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 100px;
+}
+
+h1, h3{
+  text-align: center;
+}
+
+.custom-top-margin {
+  margin-top: 10px;
+}
