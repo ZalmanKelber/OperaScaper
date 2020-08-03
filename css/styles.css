@@ -1,0 +1,20 @@
+.country {
+  fill: tan;
+  stroke: #231709;
+  /* stroke-opacity: 0.15; */
+  stroke-width: .15;
+}
+
+.sphere {
+  fill: aliceblue;
+}
+
+.city {
+  fill: #3f301d;
+  fill-opacity: 0.6;
+}
+
+.city:hover {
+  fill: maroon;
+  fill-opacity: 0.8;
+}

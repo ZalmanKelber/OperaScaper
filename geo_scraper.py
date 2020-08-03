@@ -30,13 +30,19 @@ def load_countries():
         country_map[country["code"]] = country["name"]
     return country_map
 
+def fixes(city_name):
+
+    if city_name == "Bialystok": return "Białystok"
+    if city_name == "Québec": return "Québec City"
+    return city_name
+
 def fetch_locations(cur, api_info):
     country_map = load_countries()
     cur.execute('SELECT * FROM Cities')
     cities = cur.fetchall()
     for city in cities:
         values = dict()
-        values["address"] = city[1] + ", " + country_map[city[2]]
+        values["address"] = fixes(city[1]) + ", " + country_map[city[2]]
         values["key"] = api_info["key"]
         data = urllib.parse.urlencode(values)
         url = api_info["service_url"] + data

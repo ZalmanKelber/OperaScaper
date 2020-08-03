@@ -5,7 +5,8 @@ default_dbfile = "operadb.sqlite"
 
 def get_cities():
     cities = dict()
-    cur.execute('''SELECT Productions.performances, Operas.composer, Cities.id, Cities.lat, Cities.lng
+    cur.execute('''SELECT Productions.performances, Operas.composer,
+                Cities.id, Cities.lat, Cities.lng, Cities.city
                 FROM Productions JOIN Operas ON Productions.opera_id = Operas.id
                 JOIN Cities ON Productions.city_id = Cities.id;
     ''')
@@ -15,7 +16,8 @@ def get_cities():
             cities[production[2]] = {"productions" : [{"performances" : production[0],
                                                         "composer" : production[1]}],
                                         "lat" : production[3],
-                                        "lng" : production[4]}
+                                        "lng" : production[4],
+                                        "name" : production[5]}
         else:
             cities[production[2]]["productions"].append({"performances" : production[0],
                                                         "composer" : production[1]})

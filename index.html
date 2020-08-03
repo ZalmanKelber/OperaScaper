@@ -1,0 +1,38 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=yes" />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Sora:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <title>Operabase Scraper</title>
+
+</head>
+
+<body>
+  <h1>Operabase Scraper</h1>
+  <h3>World Map of Opera Performances</h3>
+  <div class="canvas-wrapper">
+    <svg id="map" width="960" height="500"></svg>
+    <div class="map-search">
+      <p>Search by Composer</p>
+      <form id="map-form">
+        <input type="text" name="composer"/>
+        <input type="submit" />
+      </form>
+    </div>
+  </div>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://d3js.org/d3-array.v1.min.js"></script>
+  <script src="https://d3js.org/d3-geo.v1.min.js"></script>
+  <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+  <script src="https://unpkg.com/topojson@3.0.2/dist/topojson.min.js"></script>
+  <script src="./js/cities.js"></script>
+  <script src="./js/casts.js"></script>
+  <script src="./js/artists.js"></script>
+  <script src="./js/artist_info.js"></script>
+  <script src="./js/renderMap.js"></script>
+</body>
+</html>
