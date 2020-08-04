@@ -17,7 +17,7 @@
   const innerWidth = width - margin.left - margin.bottom;
   const innerHeight = height - margin.top - margin.bottom;
 
-  getColor = {performances: "steelblue", productions: "#fbb34c", companies: "#984756", cities: "#67d294"}
+  const getColor = {performances: "steelblue", productions: "#fbb34c", companies: "#984756", cities: "#67d294"}
 
   function render() {
     svg.remove();

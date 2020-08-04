@@ -23,6 +23,7 @@
         <br />
         <input type="submit" class="btn btn-primary custom-top-margin"/>
       </form>
+      <p id="city-display"></p>
     </div>
     <svg id="map" width="960" height="500"></svg>
   </div>
@@ -49,6 +50,30 @@
       <svg class="chart" width="960" height="500"></svg>
     </div>
   </div>
+  <h3>III. The Singers who Worked with the Same Colleagues at the Most Companies</h3>
+  <div class="canvas-wrapper">
+    <div class="chart-select">
+      <div class="dropdown">
+        <button
+          class="btn btn-primary dropdown-toggle"
+          type="button"
+          data-toggle="dropdown"
+        >
+          Number of Companies:
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a id="y-3" href="#">At least 3 distinct companies</a></li>
+          <li><a id="y-4" href="#">At least 4 distinct companies</a></li>
+          <li><a id="y-5" href="#">At least 5 distinct companies</a></li>
+          <li><a id="y-6" href="#">At least 6 distinct companies</a></li>
+        </ul>
+      </div>
+      <div id="artist-display"></div>
+    </div>
+    <div id="graph-wrapper">
+      <svg class="graph" width="960" height="500"></svg>
+    </div>
+  </div>
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="https://d3js.org/d3-array.v1.min.js"></script>
   <script src="https://d3js.org/d3-geo.v1.min.js"></script>
@@ -57,8 +82,11 @@
   <script src="./js/cities.js"></script>
   <script src="./js/casts.js"></script>
   <script src="./js/artists.js"></script>
+  <script src="./js/companies.js"></script>
   <script src="./js/artistInfo.js"></script>
   <script src="./js/renderMap.js"></script>
-    <script src="./js/renderChart.js"></script>
+  <script src="./js/renderChart.js"></script>
+  <script src="./js/generateColors.js"></script>
+  <script src="./js/renderGraph.js"></script>
 </body>
 </html>

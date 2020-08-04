@@ -5,15 +5,8 @@
     cities: Object.values(cities),
     prevZoom: 1
   }
-  state.cities.forEach(city1 => {
-    state.cities.forEach(city2 => {
-      if (city1.lat === city2.lat && city1.lng === city2.lng && city1 !== city2) {
-        console.log(city1.name);
-      }
-    });
-  });
 
-  const { select, json, geoPath, geoEckert4, scalePow, zoom, zoomIdentity } = d3;
+  const { select, json, geoPath, geoEckert4, scalePow, zoom, zoomIdentity, drag } = d3;
   const { feature } = topojson;
 
   const svg = select("#map");
@@ -57,9 +50,8 @@
             return projection([d.lng, d.lat])[1];
           }})
         .attr("r", d => `${getRadius(d, state.composer) / state.prevZoom}px`)
-        .on("hover", d => {
-          console.log("hover event");
-        })
+      .call(drag()
+        .on("start", renderCity))
       .append("title")
         .attr("class", "map-title")
         .text(d => d.name + " | total performances: " + d.totalPerformances)
@@ -69,6 +61,11 @@
       .append("title")
         .text(d => d.name + " | total performances: " + d.totalPerformances);
 
+  }
+
+  function renderCity(d) {
+    const el = document.getElementById("city-display");
+    el.innerHTML = d.name + " | total performances: " + d.totalPerformances;
   }
 
   function getRadius(city, composer) {
@@ -90,7 +87,7 @@
     .on("zoom", zoomed);
 
   function zoomed() {
-    const transform = d3.event.transform;
+    const { transform } = d3.event;
     gCities.attr("transform", transform)
     gMap.attr("transform", transform)
     circlesToUpdate = document.querySelectorAll(".city");

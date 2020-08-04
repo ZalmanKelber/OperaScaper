@@ -42,7 +42,7 @@
 .canvas-wrapper {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 100px;
+  margin: 0 50px 100px;
 }
 
 h1, h3{
@@ -51,4 +51,9 @@ h1, h3{
 
 .custom-top-margin {
   margin-top: 10px;
+}
+
+
+.graph-node {
+  fill-opacity: 0.4;
 }

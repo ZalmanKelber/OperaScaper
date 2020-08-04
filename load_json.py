@@ -33,9 +33,9 @@ def get_casts():
     cast_members = cur.fetchall()
     for item in cast_members:
         if item[0] not in casts:
-            casts[item[0]] = {"company" : item[2], "cast" : [item[1]]}
+            casts[item[0]] = {"company" : item[2], "cast" : {item[1] : True}}
         else:
-            casts[item[0]]["cast"].append(item[1])
+            casts[item[0]]["cast"][item[1]] = True
     with open('js/casts.js', 'w') as outfile:
         outfile.write("casts = ")
         json.dump(casts, outfile)
@@ -50,9 +50,20 @@ def get_artists():
         outfile.write("artists = ")
         json.dump(artists, outfile)
 
+def get_companies():
+    companies = dict()
+    cur.execute('SELECT * FROM Companies')
+    company_list = cur.fetchall()
+    for company in company_list:
+        companies[company[0]] = company[1]
+    with open('js/companies.js', 'w') as outfile:
+        outfile.write("companies = ")
+        json.dump(companies, outfile)
+
 def get_artist_info():
     artist_info = dict()
-    cur.execute('''SELECT Casts.artist_id, Productions.performances, Productions.city_id, Productions.company_id
+    cur.execute('''SELECT Casts.artist_id, Productions.performances,
+                Productions.city_id, Productions.company_id, Productions.id
                 FROM Casts JOIN Productions ON Casts.production_id = Productions.id;
     ''')
     cast_members = cur.fetchall()
@@ -60,10 +71,10 @@ def get_artist_info():
         if artist[0] not in artist_info:
             artist_info[artist[0]] = {"companies" : {artist[3] : True},
                                         "cities" : {artist[2] : True},
-                                        "productions" : 1,
+                                        "productionsList" : [artist[4]],
                                         "performances" : artist[1]}
         else:
-            artist_info[artist[0]]["productions"] += 1
+            artist_info[artist[0]]["productionsList"] += [artist[4]]
             artist_info[artist[0]]["performances"] += artist[1]
             if artist[3] not in artist_info[artist[0]]["companies"]:
                 artist_info[artist[0]]["companies"][artist[3]] = True
@@ -72,6 +83,7 @@ def get_artist_info():
     for artist in artist_info:
         artist_info[artist]["companies"] = len(artist_info[artist]["companies"].keys())
         artist_info[artist]["cities"] = len(artist_info[artist]["cities"].keys())
+        artist_info[artist]["productions"] = len(artist_info[artist]["productionsList"])
     with open('js/artistInfo.js', 'w') as outfile:
         outfile.write("artistInfo = ")
         json.dump(artist_info, outfile)
@@ -84,5 +96,6 @@ if __name__ == "__main__":
     get_cities()
     get_casts()
     get_artists()
+    get_companies()
     get_artist_info()
     conn.close()
