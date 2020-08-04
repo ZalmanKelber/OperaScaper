@@ -56,7 +56,7 @@
   }
 }
 
-@media screen and (max-width: 609px) {
+@media screen and (max-width: 699px) {
   .canvas-wrapper {
     display: flex;
     flex-direction: column-reverse;
