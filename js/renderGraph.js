@@ -17,8 +17,8 @@
   const { forceSimulation, forceCenter, forceManyBody, forceLink, select, selectAll, drag } = d3;
 
   let svg = select(".graph");
-  const width = +svg.attr("width");
-  const height = +svg.attr("height");
+  const width = window.innerWidth >= 700 ? Math.min(960, window.innerWidth - 300) : window.innerWidth;
+  const height = width * 500 / 960;
   const radiusFactor = 4;
   const getChargeStrength = {3: -1, 4: -5, 5: -10, 6: -20}
 
@@ -139,8 +139,8 @@
     svg = selectAll("#graph-wrapper").append("svg")
     svg
       .attr("class", "graph")
-      .attr("width", width)
-      .attr("height", height);
+      .attr("width", window.innerWidth >= 700 ? Math.min(960, window.innerWidth - 300) : window.innerWidth)
+      .attr("height", width * 500 / 960);
     drawLinks();
     drawNodes();
 
@@ -218,13 +218,11 @@
       return acc;
     }, {}));
     const el = document.getElementById("artist-display");
-    el.innerHTML = `<p>${state.artistsHash[artist]}</p>
-                    <ul>
+    el.innerHTML = `<h6>${state.artistsHash[artist]}</h6>
                     ${companiesList.reduce((acc, company) => {
-                      acc += `<li>${state.companies[company]}</li>`;
+                      acc += `<p class="company-item">${state.companies[company]}</p>`;
                       return acc;
-                    }, "")}
-                    </ul>`
+                    }, "")}`
   }
 
   updateState();

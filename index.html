@@ -16,20 +16,24 @@
   <h1>Operabase Scraper</h1>
   <h3>I. World Map of Opera Performances in 2019 (zoomable)</h3>
   <div class="canvas-wrapper">
-    <div class="map-search">
-      <p>Search by Composer</p>
-      <form id="map-form">
-        <input class="input" type="text" name="composer"/>
-        <br />
-        <input type="submit" class="btn btn-primary custom-top-margin"/>
-      </form>
+    <div class="map-search side-panel">
+      <div class="map-options">
+        <p>Search by Composer</p>
+        <form id="map-form" class="map-form">
+          <input class="input" type="text" name="composer" autocomplete="off"/>
+          <br />
+          <input type="submit" class="btn btn-primary custom-top-margin"/>
+        </form>
+      </div>
       <p id="city-display"></p>
     </div>
-    <svg id="map" width="960" height="500"></svg>
+    <div id="map-container">
+      <svg id="map"></svg>
+    </div>
   </div>
   <h3>II. Percentage of Singers in a Given Number of Performances in 2019</h3>
   <div class="canvas-wrapper">
-    <div class="chart-select">
+    <div class="chart-select side-panel">
       <div class="dropdown">
         <button
           class="btn btn-primary dropdown-toggle"
@@ -47,12 +51,12 @@
       </div>
     </div>
     <div id="chart-wrapper">
-      <svg class="chart" width="960" height="500"></svg>
+      <svg class="chart"></svg>
     </div>
   </div>
   <h3>III. The Singers who Worked with the Same Colleagues at the Most Companies</h3>
   <div class="canvas-wrapper">
-    <div class="chart-select">
+    <div class="chart-select side-panel graph-side">
       <div class="dropdown">
         <button
           class="btn btn-primary dropdown-toggle"
@@ -68,10 +72,10 @@
           <li><a id="y-6" href="#">At least 6 distinct companies</a></li>
         </ul>
       </div>
-      <div id="artist-display"></div>
+      <div id="artist-display" class="artist-display"></div>
     </div>
     <div id="graph-wrapper">
-      <svg class="graph" width="960" height="500"></svg>
+      <svg class="graph"></svg>
     </div>
   </div>
   <script src="https://d3js.org/d3.v4.min.js"></script>

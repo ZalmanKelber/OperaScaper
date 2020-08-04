@@ -11,15 +11,20 @@
   }
 
   let svg = select(".chart");
-  const width = +svg.attr("width");
-  const height = +svg.attr("height");
   const margin = {top: 60, right: 40, bottom: 88, left: 150}
-  const innerWidth = width - margin.left - margin.bottom;
-  const innerHeight = height - margin.top - margin.bottom;
+
+  window.addEventListener('resize', () => {
+    console.log("resizing");
+    render();
+  });
 
   const getColor = {performances: "steelblue", productions: "#fbb34c", companies: "#984756", cities: "#67d294"}
 
   function render() {
+    const width = window.innerWidth >= 700 ? Math.min(960, window.innerWidth - 300) : window.innerWidth;
+    const height = width * 500 / 960;
+    const innerWidth = width - margin.left - margin.bottom;
+    const innerHeight = height - margin.top - margin.bottom;
     svg.remove();
     svg = selectAll("#chart-wrapper").append("svg")
     svg
