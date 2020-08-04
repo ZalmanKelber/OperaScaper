@@ -30,14 +30,15 @@
   fill: #635F5D;
 }
 
+.axis-label text {
+  fill: #635F5D;
+}
+
 .tick line {
   stroke: #C0C0BB;
 }
 
-.axis-label {
-  font-size: 2em;
-  fill: black;
-}
+
 @media screen and (min-width: 700px) {
   .canvas-wrapper {
     display: flex;
@@ -113,4 +114,19 @@ h6 {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.chart {
+  background-color: #fbfbfb;
+}
+
+.map {
+  border: solid 1px #f0f0f0;
+}
+
+.graph {
+  background:
+        linear-gradient(to top, rgba(247, 251, 253, 0), rgba(239, 247, 250, 1), rgba(247, 251, 253, 0)),
+        linear-gradient(to right,#cce5e5, white);
+  border: solid 1px #cce5e5;
 }

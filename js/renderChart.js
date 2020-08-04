@@ -11,7 +11,6 @@
   }
 
   let svg = select(".chart");
-  const margin = {top: 60, right: 40, bottom: 88, left: 150}
 
   window.addEventListener('resize', () => {
     console.log("resizing");
@@ -23,6 +22,12 @@
   function render() {
     const width = window.innerWidth >= 700 ? Math.min(960, window.innerWidth - 300) : window.innerWidth;
     const height = width * 500 / 960;
+    const margin = {
+      top: width * 6 / 96,
+      right: width * 4 / 96,
+      bottom: width * 10 / 96,
+      left: width * 15 / 96
+    }
     const innerWidth = width - margin.left - margin.bottom;
     const innerHeight = height - margin.top - margin.bottom;
     svg.remove();
@@ -48,7 +53,7 @@
       .nice()
     const xAxis = axisBottom(xScale)
       .tickSize(-innerHeight)
-      .tickPadding(15);
+      .tickPadding(margin.bottom * 15 / 88);
     const yAxis = axisLeft(yScale)
       .tickSize(-innerWidth)
       .tickPadding(10);
@@ -56,9 +61,10 @@
     yAxisG.selectAll(".domain").remove();
     yAxisG.append("text")
       .attr("class", "axis-label")
-      .attr("y", -93)
+      .attr("y", -50)
       .attr("x", -innerHeight / 2)
-      .attr("fill", "black")
+      .attr("font-size", `${2 * width / 960}em`)
+      .attr("fill", "#635F5D")
       .attr("transform", "rotate(-90)")
       .attr("text-anchor", "middle")
       .text(yAxisLabel);
@@ -67,9 +73,10 @@
     xAxisG.selectAll(".domain").remove();
     xAxisG.append("text")
       .attr("class", "axis-label")
-      .attr("y", 75)
+      .attr("y", width > 600 ? 50 : 40)
       .attr("x", innerWidth / 2)
-      .attr("fill", "black")
+      .attr("font-size", `${2 * width / 960}em`)
+      .attr("fill", "#635F5D")
       .text(xAxisLabel);
     const lineGenerator = line()
       .x(d => xScale(x(d)))
