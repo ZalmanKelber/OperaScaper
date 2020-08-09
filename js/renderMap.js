@@ -145,7 +145,13 @@
   mapForm.addEventListener("submit", e => {
     e.preventDefault();
     state.composer = e.target.composer.value;
-    renderCircles(state);
+    renderMap();
+    renderCircles();
+    const zoomSetup = zoom()
+      .scaleExtent([.5, 32])
+      .on("zoom", zoomed);
+    zoomIdentity.k = state.scaleConstant;
+    svg.call(zoomSetup).call(zoomSetup.transform, zoomIdentity);
     const titles = document.querySelectorAll(".map-title");
     titles.forEach(title => {
       title.remove();

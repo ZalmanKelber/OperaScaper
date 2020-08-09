@@ -3,7 +3,7 @@ import sqlite3
 import ssl
 import json
 
-def initialize(cur):
+def initialize(cur: sqlite3.Cursor):
     cur.executescript('''
     CREATE TABLE IF NOT EXISTS CitiesCopy(
        id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
@@ -30,13 +30,13 @@ def load_countries():
         country_map[country["code"]] = country["name"]
     return country_map
 
-def fixes(city_name):
+def fixes(city_name: str):
 
     if city_name == "Bialystok": return "Białystok"
     if city_name == "Québec": return "Québec City"
     return city_name
 
-def fetch_locations(cur, api_info):
+def fetch_locations(cur: sqlite3.Cursor, api_info: dict):
     country_map = load_countries()
     cur.execute('SELECT * FROM Cities')
     cities = cur.fetchall()
@@ -67,6 +67,15 @@ def fetch_locations(cur, api_info):
             cur.execute('UPDATE Cities SET lat = ?, lng = ? WHERE id = ?', (lat, lng, city[0]))
         except:
             continue
+            
+def main():
+    dbfile = input("Enter file: ") or default_dbfile
+    conn = sqlite3.connect(dbfile)
+    cur = conn.cursor()
+    initialize(cur)
+    fetch_locations(cur, api_info)
+    conn.commit()
+    conn.close()
 
 default_dbfile = "operadb.sqlite"
 api_info = dict()
@@ -80,10 +89,4 @@ ctx.verify_mode = ssl.CERT_NONE
 api_info["ctx"] = ctx
 
 if __name__ == "__main__":
-    dbfile = input("Enter file: ") or default_dbfile
-    conn = sqlite3.connect(dbfile)
-    cur = conn.cursor()
-    initialize(cur)
-    fetch_locations(cur, api_info)
-    conn.commit()
-    conn.close()
+    main()

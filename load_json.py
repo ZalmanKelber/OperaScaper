@@ -3,7 +3,7 @@ import sqlite3
 
 default_dbfile = "operadb.sqlite"
 
-def get_cities():
+def get_cities(cur: sqlite3.Cursor):
     cities = dict()
     cur.execute('''SELECT Productions.performances, Operas.composer,
                 Cities.id, Cities.lat, Cities.lng, Cities.city
@@ -25,7 +25,7 @@ def get_cities():
         outfile.write("cities = ")
         json.dump(cities, outfile)
 
-def get_casts():
+def get_casts(cur: sqlite3.Cursor):
     casts = dict()
     cur.execute('''SELECT Casts.production_id, Casts.artist_id, Productions.company_id
 				FROM Casts JOIN Productions on Casts.production_id = Productions.id;
@@ -40,7 +40,7 @@ def get_casts():
         outfile.write("casts = ")
         json.dump(casts, outfile)
 
-def get_artists():
+def get_artists(cur: sqlite3.Cursor):
     artists = dict()
     cur.execute('SELECT * FROM Artists')
     artist_list = cur.fetchall()
@@ -50,7 +50,7 @@ def get_artists():
         outfile.write("artists = ")
         json.dump(artists, outfile)
 
-def get_companies():
+def get_companies(cur: sqlite3.Cursor):
     companies = dict()
     cur.execute('SELECT * FROM Companies')
     company_list = cur.fetchall()
@@ -60,7 +60,7 @@ def get_companies():
         outfile.write("companies = ")
         json.dump(companies, outfile)
 
-def get_artist_info():
+def get_artist_info(cur: sqlite3.Cursor):
     artist_info = dict()
     cur.execute('''SELECT Casts.artist_id, Productions.performances,
                 Productions.city_id, Productions.company_id, Productions.id
@@ -88,14 +88,16 @@ def get_artist_info():
         outfile.write("artistInfo = ")
         json.dump(artist_info, outfile)
 
-
-if __name__ == "__main__":
+def main():
     dbfile = input("Enter file: ") or default_dbfile
     conn = sqlite3.connect(dbfile)
     cur = conn.cursor()
-    get_cities()
-    get_casts()
-    get_artists()
-    get_companies()
-    get_artist_info()
+    get_cities(cur)
+    get_casts(cur)
+    get_artists(cur)
+    get_companies(cur)
+    get_artist_info(cur)
     conn.close()
+
+if __name__ == "__main__":
+    main()

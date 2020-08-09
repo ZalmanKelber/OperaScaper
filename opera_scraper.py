@@ -10,7 +10,7 @@ parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
 from bs4 import BeautifulSoup
 
-def initialize_database(cur):
+def initialize_database(cur: sqlite3.Cursor):
 
     # Make some fresh tables using executescript()
     cur.executescript('''
@@ -60,7 +60,7 @@ def initialize_database(cur):
     );
     ''')
 
-def fetch_cities(cur, http_info):
+def fetch_cities(cur: sqlite3.Cursor, http_info: dict):
     for country in http_info["countries"]:
         country_code = country["code"]
         displayed = False
@@ -83,7 +83,7 @@ def fetch_cities(cur, http_info):
             except:
                 pass
 
-def fetch_productions(cur, http_info):
+def fetch_productions(cur: sqlite3.Cursor, http_info: dict):
     cur.execute('SELECT * FROM Cities')
     rows = cur.fetchall()
     for row in rows:
@@ -114,7 +114,7 @@ def fetch_productions(cur, http_info):
             except:
                 pass
 
-def fetch_production_info(cur, http_info):
+def fetch_production_info(cur: sqlite3.Cursor, http_info: dict):
     cur.execute('SELECT id FROM Productions')
     rows = cur.fetchall()
     counter = 1
@@ -155,6 +155,16 @@ def fetch_production_info(cur, http_info):
         print(counter, "/", num_productions)
         counter += 1
 
+def main():
+    conn = sqlite3.connect(dbfile)
+    cur = conn.cursor()
+    initialize_database(cur)
+    fetch_cities(cur, http_info)
+    fetch_productions(cur, http_info)
+    fetch_production_info(cur, http_info)
+    conn.commit()
+    conn.close()
+
 dbfile = "operadb.sqlite"
 
 with open("countries.json") as f:
@@ -184,12 +194,4 @@ http_info = {"countries" : countries,
             "values" : values}
 
 if __name__ == "__main__":
-    conn = sqlite3.connect(dbfile)
-    cur = conn.cursor()
-    print(type(cur));
-    # initialize_database(cur)
-    # fetch_cities(cur, http_info)
-    # fetch_productions(cur, http_info)
-    # fetch_production_info(cur, http_info)
-    conn.commit()
-    conn.close()
+    main()
