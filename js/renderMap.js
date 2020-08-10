@@ -1,4 +1,15 @@
 (function() {
+  const el = document.getElementById("composer-dropdown");
+  const firstItem = `<li><a id="composer-all" class="composer-option" href="#">All</a></li>`
+  const listContent = composers.reduce((acc, composer) => {
+    acc += `<li><a id="composer-${composer}" class="composer-option" href="#">${composer}</a></li>`
+    return acc;
+  }, firstItem);
+  el.innerHTML = listContent;
+})();
+
+
+(function() {
   const state = {
     composer: null,
     mapData: null,
@@ -140,11 +151,16 @@
     svg.call(zoomSetup).call(zoomSetup.transform, zoomIdentity);
   });
 
+  composers.forEach(composer => {
+    el = document.getElementById(`composer-${composer}`);
+    el.addEventListener("click", e => handleSelect(e, composer));
+  })
+  el = document.getElementById("composer-all");
+  el.addEventListener("click", e => handleSelect(e, ""));
 
-  const mapForm = document.getElementById("map-form");
-  mapForm.addEventListener("submit", e => {
+  function handleSelect(e, composer) {
     e.preventDefault();
-    state.composer = e.target.composer.value;
+    state.composer = composer;
     renderMap();
     renderCircles();
     const zoomSetup = zoom()
@@ -155,8 +171,25 @@
     const titles = document.querySelectorAll(".map-title");
     titles.forEach(title => {
       title.remove();
-    })
-  });
+    });
+  }
+
+  // const mapForm = document.getElementById("map-form");
+  // mapForm.addEventListener("submit", e => {
+  //   e.preventDefault();
+  //   state.composer = e.target.composer.value;
+  //   renderMap();
+  //   renderCircles();
+  //   const zoomSetup = zoom()
+  //     .scaleExtent([.5, 32])
+  //     .on("zoom", zoomed);
+  //   zoomIdentity.k = state.scaleConstant;
+  //   svg.call(zoomSetup).call(zoomSetup.transform, zoomIdentity);
+  //   const titles = document.querySelectorAll(".map-title");
+  //   titles.forEach(title => {
+  //     title.remove();
+  //   })
+  // });
 
 
 })();

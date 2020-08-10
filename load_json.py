@@ -60,6 +60,14 @@ def get_companies(cur: sqlite3.Cursor):
         outfile.write("companies = ")
         json.dump(companies, outfile)
 
+def get_composers(cur: sqlite3.Cursor):
+    cur.execute('''SELECT  composer, SUM(performances) FROM Productions JOIN Operas ON
+                Productions.opera_id = Operas.id GROUP BY composer ORDER BY SUM(performances) DESC''')
+    composers = list(map(lambda result: result[0], cur.fetchall()))
+    with open('js/composers.js', 'w') as outfile:
+        outfile.write("composers = ")
+        json.dump(composers, outfile)
+
 def get_artist_info(cur: sqlite3.Cursor):
     artist_info = dict()
     cur.execute('''SELECT Casts.artist_id, Productions.performances,
@@ -95,6 +103,7 @@ def main():
     get_cities(cur)
     get_casts(cur)
     get_artists(cur)
+    get_composers(cur)
     get_companies(cur)
     get_artist_info(cur)
     conn.close()

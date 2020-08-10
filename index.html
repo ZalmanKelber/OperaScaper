@@ -18,12 +18,17 @@
   <div class="canvas-wrapper">
     <div class="map-search side-panel">
       <div class="map-options">
-        <p>Search by Composer</p>
-        <form id="map-form" class="map-form">
-          <input class="input" type="text" name="composer" autocomplete="off"/>
-          <br />
-          <input type="submit" class="btn btn-primary custom-top-margin"/>
-        </form>
+        <div class="dropdown">
+          <button
+            class="btn btn-primary dropdown-toggle"
+            type="button"
+            data-toggle="dropdown"
+          >
+            Search by Composer
+          <span class="caret"></span></button>
+          <ul id="composer-dropdown" class="dropdown-menu">
+          </ul>
+        </div>
       </div>
       <p id="city-display"></p>
     </div>
@@ -87,6 +92,7 @@
   <script src="./js/casts.js"></script>
   <script src="./js/artists.js"></script>
   <script src="./js/companies.js"></script>
+  <script src="./js/composers.js"></script>
   <script src="./js/artistInfo.js"></script>
   <script src="./js/renderMap.js"></script>
   <script src="./js/renderChart.js"></script>
