@@ -10,7 +10,7 @@ This program uses the python **urllib** module in conjunction with the **Beautif
 
 ## Data Visualization 
 
-This application was intentionally designed to be hosted on **Github Pages** or simply opened up in a web browser without the use of a server.  As a result, it does not rely on any server-side rendering, nor does it contain ES6 modules (the different javaScript files are encapsulated using IIFE's).  It uses the **D3 JS** library to create three interactive visualizations: a zoomable map of opera performances (that can be filtered by composer), a chart showing the differing amounts of work that singers in the industry received in 2019 and a graph showing which singers worked together across multiple companies within 2019.  Some buttons and the dropdown menus are rendered with **Bootstrap.**
+This application was intentionally designed to be hosted on **Github Pages** or simply opened up in a web browser without the use of a server.  As a result, it does not rely on any server-side rendering, nor does it contain ES6 modules (the different javaScript files are encapsulated using IIFE's).  It uses the **D3 JS** library to create three interactive visualizations: a zoomable map of opera performances (that can be filtered by composer), a chart showing the differing amounts of work that singers in the industry received in 2019 and a graph showing which singers worked together across multiple companies within 2019.  TopoJson data was used for the map and was rendered in the **Eckert IV** Equal Area projection.  Some buttons and the dropdown menus are rendered with **Bootstrap.**
 
 # Instructions for replicating
 
