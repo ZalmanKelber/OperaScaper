@@ -1,6 +1,6 @@
 # Live Version
 
-View the visualization of this data on **Github Pages** [here]()
+View the visualization of this data on **Github Pages** [here](https://zalmankelber.github.io/OperaScaper/)
 
 # Overview
 
@@ -8,7 +8,7 @@ View the visualization of this data on **Github Pages** [here]()
 
 This program uses the python **urllib** module in conjunction with the **Beautiful Soup** library to scrape and parse 2019 information on worldwide opera performances from [Operabase](https://www.operabase.com/en), including a comprehensive list of all cities and opera companies for which there are records, and the number of productions and performances for each, as well as the individual opera singers, opera titles and opera composers.  For each city, geographical coordinates are obtained by searching a version of the **Google Maps API** available from the University of Michigan [Python for Everybody](https://online.umich.edu/series/python-for-everybody/) course.  The data is stored in a SQLite database in several tables so that a given search query can generally be accessed in constant time, and the program also transfers this data into three JSON objects for use in the accompanying web interactive visualization of this data.  In addition, **Postman** was used during the writing of the program in order test operabase's backend API endpoint.
 
-## Data Visualization 
+## Data Visualization
 
 This application was intentionally designed to be hosted on **Github Pages** or simply opened up in a web browser without the use of a server.  As a result, it does not rely on any server-side rendering, nor does it contain ES6 modules (the different javaScript files are encapsulated using IIFE's).  It uses the **D3 JS** library to create three interactive visualizations: a zoomable map of opera performances (that can be filtered by composer), a chart showing the differing amounts of work that singers in the industry received in 2019 and a graph showing which singers worked together across multiple companies within 2019.  TopoJson data was used for the map and was rendered in the **Eckert IV** Equal Area projection.  Some buttons and the dropdown menus are rendered with **Bootstrap.**
 
@@ -25,9 +25,9 @@ sys.path.insert(0, parent_dir)
 
 Run `opera_scraper.py`, `geo_scraper.py` and then `load_json.py` in succession on the command line.  Note that the JSON data in the `js` folder will be overwritten by the last program.  To view the visualization, simply open up `index.html` in any web browser.
 
-# About 
+# About
 
-## Data modeling 
+## Data modeling
 
 The data obtained is stored in six separate SQL tables to allow efficient memeory storage by relying on foreign keys and swift lookup.
 
@@ -70,7 +70,7 @@ In the graph, each draggable circle represents an artist, and is linked to other
 
 * This data treats all singers who appeared in a production as castmates who worked together (for the purpose of the graph), but many in fact sang during separate performances across the performance run of a production and thus did not appear on stage together.
 
-## Regarding the visualization 
+## Regarding the visualization
 
 * The zoomable map does not work well on mobile.
 
